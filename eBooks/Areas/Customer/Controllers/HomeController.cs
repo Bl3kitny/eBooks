@@ -1,6 +1,10 @@
-﻿using eBooks.Models;
+﻿using eBooks.DataAccess.Repository.IRepository;
+using eBooks.Models;
+using eBooks.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace eBooks.Controllers;
 [Area("Customer")]
@@ -8,18 +12,59 @@ namespace eBooks.Controllers;
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Product> products = _unitOfWork.Product.GetAll(includeProperties:"Category,CoverType");
+            return View(products);
+        }
+        public IActionResult Details(int productId)
+        {
+            ShoppingCart cartObj = new()
+            {
+             Product = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == productId, includeProperties: "Category,CoverType"),
+                Count = 1,
+                ProductId = productId
+
+            };
+            return View(cartObj);
+        }
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    [Authorize]
+    public IActionResult Details(ShoppingCart shoppingCart)
+    {
+        var claimIdentity = (ClaimsIdentity)User.Identity;
+        var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier);
+        shoppingCart.ApplicationUserId = claim.Value;
+
+        ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.GetFirstOrDefault(
+            u=>u.ApplicationUserId==claim.Value && u.ProductId==shoppingCart.ProductId);
+
+        if (cartFromDb == null)
+        {
+            _unitOfWork.ShoppingCart.Add(shoppingCart);
+        }
+        else
+        {
+            _unitOfWork.ShoppingCart.IncrementCount(cartFromDb, shoppingCart.Count);
         }
 
-        public IActionResult Privacy()
+        _unitOfWork.Save();
+
+        return RedirectToAction(nameof(Index));
+    }
+
+
+
+    public IActionResult Privacy()
         {
             return View();
         }
