@@ -5,11 +5,13 @@ VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eBooks", "eBooks\eBooks.csproj", "{1901A071-84D0-4B77-9AF7-6D5097F5E389}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eBooks.DataAccess", "eBooks.DataAccess\eBooks.DataAccess.csproj", "{E7D038BE-6611-4103-B16D-EADCD36459E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eBooks.DataAccess", "eBooks.DataAccess\eBooks.DataAccess.csproj", "{E7D038BE-6611-4103-B16D-EADCD36459E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eBooks.Models", "eBooks.Models\eBooks.Models.csproj", "{1BAC6D77-1A8C-4F9A-8F6A-231E073F1BE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eBooks.Models", "eBooks.Models\eBooks.Models.csproj", "{1BAC6D77-1A8C-4F9A-8F6A-231E073F1BE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eBooks.Utility", "eBooks.Utility\eBooks.Utility.csproj", "{445FF22A-47AF-4CE8-855E-1B09947671F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eBooks.Utility", "eBooks.Utility\eBooks.Utility.csproj", "{445FF22A-47AF-4CE8-855E-1B09947671F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{74C3386E-7F8B-4E35-A2AA-1C3709AA08C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{445FF22A-47AF-4CE8-855E-1B09947671F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{445FF22A-47AF-4CE8-855E-1B09947671F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{445FF22A-47AF-4CE8-855E-1B09947671F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74C3386E-7F8B-4E35-A2AA-1C3709AA08C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74C3386E-7F8B-4E35-A2AA-1C3709AA08C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74C3386E-7F8B-4E35-A2AA-1C3709AA08C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74C3386E-7F8B-4E35-A2AA-1C3709AA08C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,6 +15,7 @@ public class CoverTypeController : Controller
         }
         public IActionResult Index()
         {
+
             IEnumerable<CoverType> coverTypeList = _unitOfWork.CoverType.GetAll();
             return View(coverTypeList);
         }
@@ -60,10 +61,10 @@ public class CoverTypeController : Controller
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.CoverType.Update(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "Cover Type updated successfully";
-                return RedirectToAction("Index");
+            _unitOfWork.CoverType.Update(obj);
+            _unitOfWork.Save();
+            TempData["success"] = "Cover Type updated successfully";
+            return RedirectToAction("Index");
             }
             return View(obj);
 
